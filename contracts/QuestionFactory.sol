@@ -33,19 +33,31 @@ contract QuestionFactory is Owner {
     // mapping (address => uint) ownerQuestionCount; // not sure
 
     mapping(address => Voter) public voters;
+    mapping(address => Question) public voterToQuestion;
 
     constructor() {
         director = msg.sender;
         voters[director].weight = 1;
     }
 
-    function _createQuestion(string memory _body) internal isOwner {
+    function createQuestion(string memory _body) public {
         // require(msg.sender == director, "Only the director can create questions");
         questions.push(Question(_body, 0, 0, true));
         // uint id = questions.length - 1;
         emit NewQuestion(_body);
     }
 
-
+    function vote(uint _questionId, uint _vote) public {
+       require(questions[_questionId].active == true); 
+       require(voters[msg.sender].weight > 0); //check if shareholder can vote
+       voters[msg.sender].vote = _vote; //shareholder votes
+       voters[msg.sender].voted = true; //shareholder voted
+       if (_vote > 0){ //add vote to VoteCount
+        questions[_questionId].positiveVoteCount++;
+       } else {
+        questions[_questionId].negativeVoteCount++;
+       }
+       voterToQuestion[msg.sender] = questions[_questionId]; //map shareholder to question
+    }
 
 }
