@@ -14,6 +14,7 @@ contract QuestionFactory is Director {
         bool voted;  // if true, that person already voted
         uint vote;   // index of the voted proposal, 0=false,1=true
         uint viewResults; // weight assigned to see if the Shareholder can see the results =0 cant, =1 can
+        address shareholderAddress;
     }
 
     struct Question {
@@ -38,13 +39,23 @@ contract QuestionFactory is Director {
     constructor() {
         director = msg.sender;
         shareholders[director].weight = 1;
+        shareholders[director].viewResults = 1;
     }
 
-    function createQuestion(string memory _body) public {
+    function createQuestion(string memory _body) public isDirector {
         // require(msg.sender == director, "Only the director can create questions");
         questions.push(Question(_body, 0, 0, true));
         // uint id = questions.length - 1;
         emit NewQuestion(_body);
+    }
+
+    function createShareholder(address _address) public isDirector {
+        // require(msg.sender == director, "Only the director can create questions");
+        shareholders[_address].weight = 1;
+        shareholders[_address].viewResults = 1;
+        shareholders[_address].shareholderAddress = _address;
+        // uint id = questions.length - 1;
+        // emit NewQuestion(_body);
     }
 
     function vote(uint _questionId, uint _vote) public {

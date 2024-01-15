@@ -14,6 +14,25 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "oldDirector",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newDirector",
+						"type": "address"
+					}
+				],
+				"name": "DirectorSet",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": false,
 						"internalType": "string",
 						"name": "body",
@@ -21,25 +40,6 @@
 					}
 				],
 				"name": "NewQuestion",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "oldOwner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "OwnerSet",
 				"type": "event"
 			},
 			{
@@ -71,11 +71,37 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "newOwner",
+						"name": "newDirector",
 						"type": "address"
 					}
 				],
-				"name": "changeOwner",
+				"name": "changeDirector",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_body",
+						"type": "string"
+					}
+				],
+				"name": "createQuestion",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "createShareholder",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -95,7 +121,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "getOwner",
+				"name": "getDirector",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -148,7 +174,7 @@
 						"type": "address"
 					}
 				],
-				"name": "voters",
+				"name": "shareholders",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -169,6 +195,63 @@
 						"internalType": "uint256",
 						"name": "viewResults",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "shareholderAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_questionId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_vote",
+						"type": "uint256"
+					}
+				],
+				"name": "vote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "voterToQuestion",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "body",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "positiveVoteCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "negativeVoteCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -178,16 +261,16 @@
 		"devdoc": {
 			"kind": "dev",
 			"methods": {
-				"changeOwner(address)": {
-					"details": "Change owner",
+				"changeDirector(address)": {
+					"details": "Change director",
 					"params": {
-						"newOwner": "address of new owner"
+						"newDirector": "address of new director"
 					}
 				},
-				"getOwner()": {
-					"details": "Return owner address ",
+				"getDirector()": {
+					"details": "Return director address ",
 					"returns": {
-						"_0": "address of owner"
+						"_0": "address of director"
 					}
 				}
 			},
@@ -215,20 +298,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/2_Owner.sol": {
-			"keccak256": "0x78bbbec96c5bc30ed379cb4c7bc96af4af5c71a2ed6cbd7b202097223e055294",
+		"contracts/Director.sol": {
+			"keccak256": "0xac685985ecd028f9555af6e3ae3bdabbd114fe55aa11b82d77531edd868bb99c",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://4e78c8bdef7b614a92576df195209a00fcc09bbaa00ec98c0ea29cb2118da1c5",
-				"dweb:/ipfs/QmWrv2qJbxtDegicpu5rLGk4LgXvYvo1qXMW7qQpD6vGSX"
+				"bzz-raw://5c0ebd66aa717b2b21c583fbf64b60e8f35c4f4acab762971f87c27c3d2ce190",
+				"dweb:/ipfs/Qmev8zpYQu2qby5U8aKzd9wTyADBRErefNED6X3hhyk4jX"
 			]
 		},
 		"contracts/QuestionFactory.sol": {
-			"keccak256": "0x9a118521ccba953c8cd79de8222c486dccfd33528d6316bf8f358ba88007afa7",
+			"keccak256": "0x17c8d06e7136029e4b98f76975f1129fa5f1a4578dd169920e287abc17a012af",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://f1fd79f389dd9b1bcb2beb977c283d85158e55b13f76b6daf167ae1ad51b8a05",
-				"dweb:/ipfs/Qmd6hmU63LH2J1R1yvpgwBQ5U2DFi7fF1F6wUTbdu68CvE"
+				"bzz-raw://685649fe3b1425b0729089fd1fe18522d67e78bf7274046c6290b6f902936836",
+				"dweb:/ipfs/QmPsZtCMwRxnAfD8orucghjP1wA77yv6DPe9gnLiCaAAuH"
 			]
 		},
 		"hardhat/console.sol": {
