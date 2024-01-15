@@ -5,42 +5,47 @@ import "./2_Owner.sol";
 
 contract QuestionFactory is Owner {
 
-    event NewQuestion(uint questionId, string name, uint dna);
+    event NewQuestion(string body);
+    event QuestionResults(string body, uint positiveResults, uint negativeResults);
 
-    uint dnaDigits = 16;
-    uint dnaModulus = 10 ** dnaDigits;
-    uint cooldownTime = 1 days;
+
+    struct Voter {
+        uint weight; // weight is accumulated by delegation =0 cant vote, =1 can vote
+        bool voted;  // if true, that person already voted
+        uint vote;   // index of the voted proposal, 0=false,1=true
+        uint viewResults; // weight assigned to see if the voter can see the results =0 cant, =1 can
+    }
 
     struct Question {
-      string name;
-      uint dna;
-      uint32 level;
-      uint32 readyTime;
+        // If you can limit the length to a certain number of bytes, 
+        // always use one of bytes1 to bytes32 because they are much cheaper
+        string body;   // short name (up to 32 bytes)
+        uint positiveVoteCount; // number of accumulated votes +
+        uint negativeVoteCount; // number of accumulated votes -
+        bool active; // if the question is still active
     }
 
     Question[] public questions;
 
-    mapping (uint => address) public questionToOwner;
-    mapping (address => uint) ownerQuestionCount;
+    address public director;
 
-    function _createQuestion(string memory _name, uint _dna) internal {
-        questions.push(Question(_name, _dna, 1, uint32(block.timestamp + cooldownTime)));
-        uint id = questions.length - 1;
-        questionToOwner[id] = msg.sender;
-        ownerQuestionCount[msg.sender]++;
-        emit NewQuestion(id, _name, _dna);
+    // mapping (uint => address) public questionToOwner; // not sure
+    // mapping (address => uint) ownerQuestionCount; // not sure
+
+    mapping(address => Voter) public voters;
+
+    constructor() {
+        director = msg.sender;
+        voters[director].weight = 1;
     }
 
-    function _generateRandomDna(string memory _str) private view returns (uint) {
-        uint rand = uint(keccak256(abi.encodePacked(_str)));
-        return rand % dnaModulus;
+    function _createQuestion(string memory _body) internal isOwner {
+        // require(msg.sender == director, "Only the director can create questions");
+        questions.push(Question(_body, 0, 0, true));
+        // uint id = questions.length - 1;
+        emit NewQuestion(_body);
     }
 
-    function createRandomQuestion(string memory _name) public {
-        require(ownerQuestionCount[msg.sender] == 0);
-        uint randDna = _generateRandomDna(_name);
-        randDna = randDna - randDna % 100;
-        _createQuestion(_name, randDna);
-    }
+
 
 }

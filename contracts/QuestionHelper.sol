@@ -2,28 +2,23 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 import "./QuestionFactory.sol";
+import "contracts/2_Owner.sol";
 
 contract QuestionHelper is QuestionFactory {
 
-  modifier aboveLevel(uint _level, uint _questionId) {
-    require(questions[_questionId].level >= _level);
-    _;
+
+  function changeRightToVote(address _voterId, uint _rightValue) external isOwner {
+    voters[_voterId].weight = _rightValue;
   }
 
-  function changeName(uint _questionId, string calldata _newName) external aboveLevel(2, _questionId) {
-    require(msg.sender == questionToOwner[_questionId]);
-    questions[_questionId].name = _newName;
+  function changeRightToView(address _voterId, uint _rightValue) external isOwner {
+    voters[_voterId].viewResults = _rightValue;
   }
 
-  function changeDna(uint _questionId, uint _newDna) external aboveLevel(20, _questionId) {
-    require(msg.sender == questionToOwner[_questionId]);
-    questions[_questionId].dna = _newDna;
-  }
-
-  function getQuestionsByOwner(address _owner) external view returns(uint[] memory) {
-    uint[] memory result = new uint[](ownerQuestionCount[_owner]);
-    // Start here
-    return result;
+  function closeQuestionVoting(uint _questionId) external isOwner {
+    // require(msg.sender == questionToOwner[_questionId]);
+    questions[_questionId].active = false;
+    emit QuestionResults(questions[_questionId].body, questions[_questionId].positiveVoteCount, questions[_questionId].negativeVoteCount);
   }
 
 }

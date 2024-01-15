@@ -6,25 +6,18 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "uint256",
-						"name": "questionId",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
 						"internalType": "string",
-						"name": "name",
+						"name": "body",
 						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "dna",
-						"type": "uint256"
 					}
 				],
 				"name": "NewQuestion",
@@ -50,6 +43,31 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "body",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "positiveResults",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "negativeResults",
+						"type": "uint256"
+					}
+				],
+				"name": "QuestionResults",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -63,16 +81,16 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "director",
+				"outputs": [
 					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
+						"internalType": "address",
+						"name": "",
+						"type": "address"
 					}
 				],
-				"name": "createRandomQuestion",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -96,12 +114,27 @@
 						"type": "uint256"
 					}
 				],
-				"name": "questionToOwner",
+				"name": "questions",
 				"outputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"internalType": "string",
+						"name": "body",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "positiveVoteCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "negativeVoteCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -110,32 +143,32 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "address",
 						"name": "",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
-				"name": "questions",
+				"name": "voters",
 				"outputs": [
 					{
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
 						"internalType": "uint256",
-						"name": "dna",
+						"name": "weight",
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint32",
-						"name": "level",
-						"type": "uint32"
+						"internalType": "bool",
+						"name": "voted",
+						"type": "bool"
 					},
 					{
-						"internalType": "uint32",
-						"name": "readyTime",
-						"type": "uint32"
+						"internalType": "uint256",
+						"name": "vote",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "viewResults",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -191,11 +224,11 @@
 			]
 		},
 		"contracts/QuestionFactory.sol": {
-			"keccak256": "0xc8d8362392f22f9822a18f2847a813c69e9b9c5030dbf9a53798eff5de0b1be8",
+			"keccak256": "0x9a118521ccba953c8cd79de8222c486dccfd33528d6316bf8f358ba88007afa7",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://b3813764673a88374b558247ecbdee01e78672203c9e032e0ce7dfbbe88da835",
-				"dweb:/ipfs/QmZYoUjGMqkeCCy2WRiCGN8et6yLhHXZ4LUwKEq2iPgRM3"
+				"bzz-raw://f1fd79f389dd9b1bcb2beb977c283d85158e55b13f76b6daf167ae1ad51b8a05",
+				"dweb:/ipfs/Qmd6hmU63LH2J1R1yvpgwBQ5U2DFi7fF1F6wUTbdu68CvE"
 			]
 		},
 		"hardhat/console.sol": {
