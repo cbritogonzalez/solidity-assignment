@@ -48,21 +48,8 @@ contract QuestionHelper is QuestionFactory {
   function where every shareholder with the priviledge to view results can see the results 
   @return string that states whether or not the question passed
   */
-  function viewFinalResults(uint _questionId) external checkViewPriveledges(msg.sender, 0) view returns (string memory){
+  function viewResults(uint _questionId) external checkViewPriveledges(msg.sender, 0) view returns (string memory){
     require(questions[_questionId].active == false); //check if the question is active
-    if(questions[_questionId].positiveVoteCount > questions[_questionId].negativeVoteCount ) {
-        return "Question has passed";
-    } else {
-        return "Question has not passed";
-    }
-  }
-
-  /*
-  @param _questionId the id of the question
-  function where every shareholder with the priviledge to view results can see the results 
-  @return string that states whether or not the question passed
-  */
-  function viewCurrentResults(uint _questionId) external checkViewPriveledges(msg.sender, 0) view returns (string memory){
     if(questions[_questionId].positiveVoteCount > questions[_questionId].negativeVoteCount ) {
         return "Question has passed";
     } else {

@@ -10,7 +10,7 @@ contract QuestionFactory is Director {
 
 
     struct Shareholder {
-        uint32 weight; // weight is accumulated by delegation =0 cant vote, =1 can vote
+        uint32 weight; // weight is accumulated by delegation 0 = can't vote, 1 = can vote
         uint32 vote;   // index of the voted proposal, 0=false,1=true
         uint32 viewResults; // weight assigned to see if the Shareholder can see the results =0 cant, =1 can
         address shareholderAddress;
@@ -59,7 +59,7 @@ contract QuestionFactory is Director {
 
     /*
     param @_questionId the id of the question that is being voted
-    param @_vote the vote of the shareholder (0 for falsem 1 for true)
+    param @_vote the vote of the shareholder (0 for false 1 for true)
     */
     function vote(uint _questionId, uint _vote) public {
        require(questions[_questionId].active == true);  //check if director did not close the voting process of the question
