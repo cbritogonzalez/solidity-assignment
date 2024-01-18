@@ -28,7 +28,7 @@ contract QuestionFactory is Director {
     address public director;
 
     mapping(address => Shareholder) public shareholders;
-    mapping(address => Question) public voterToQuestion;
+    mapping(address => Question) public shareholderToQuestion;
 
     //Emoty Constructor where we set up the director and his properties. 
     constructor() {
@@ -64,7 +64,7 @@ contract QuestionFactory is Director {
     function vote(uint _questionId, uint _vote) public {
        require(questions[_questionId].active == true);  //check if director did not close the voting process of the question
        require(shareholders[msg.sender].weight > 0); //check if shareholder can vote
-       Question storage questionVoted = voterToQuestion[msg.sender]; //question that is mapped to the voter
+       Question storage questionVoted = shareholderToQuestion[msg.sender]; //question that is mapped to the voter
        Question storage questionCurrentlyVoting = questions[_questionId]; //question that is currently being voted 
        //compare the two questions (structs) to see if the shareholder voted this question
        require(keccak256(abi.encode(questionVoted)) != keccak256(abi.encode(questionCurrentlyVoting)));
@@ -73,7 +73,7 @@ contract QuestionFactory is Director {
        } else {
         questions[_questionId].negativeVoteCount++;
        }
-       voterToQuestion[msg.sender] = questions[_questionId]; //map shareholder to question
+       shareholderToQuestion[msg.sender] = questions[_questionId]; //map shareholder to question
     }
 
 }

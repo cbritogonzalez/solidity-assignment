@@ -79,7 +79,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_voterId",
+						"name": "_shareholderId",
 						"type": "address"
 					},
 					{
@@ -97,7 +97,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_voterId",
+						"name": "_shareholderId",
 						"type": "address"
 					},
 					{
@@ -224,11 +224,6 @@
 						"internalType": "uint32",
 						"name": "weight",
 						"type": "uint32"
-					},
-					{
-						"internalType": "bool",
-						"name": "voted",
-						"type": "bool"
 					},
 					{
 						"internalType": "uint32",
@@ -362,27 +357,27 @@
 	},
 	"sources": {
 		"contracts/Director.sol": {
-			"keccak256": "0xac685985ecd028f9555af6e3ae3bdabbd114fe55aa11b82d77531edd868bb99c",
+			"keccak256": "0x494925d9b400ea71e10cf06b4a18948efb5718a8fd5956d81691869af8eceba4",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://5c0ebd66aa717b2b21c583fbf64b60e8f35c4f4acab762971f87c27c3d2ce190",
-				"dweb:/ipfs/Qmev8zpYQu2qby5U8aKzd9wTyADBRErefNED6X3hhyk4jX"
+				"bzz-raw://7773741b5b0d5dc5564d70b347216372a8eec36381d370cd0ecfe2ab08f0f800",
+				"dweb:/ipfs/QmRQa2xvNFxaVhoUfrP6kjwbXaq4BFpBc5DA55awvy2i2C"
 			]
 		},
 		"contracts/QuestionFactory.sol": {
-			"keccak256": "0x048879077b02f8893ff01180cb740742f358d9445369510256e8869be266f2c8",
+			"keccak256": "0x91987b08add1bd749660e8a3f27fa4cab536401b84d92280d1a17ec623ee2fef",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://4599aeab9d981cc4c278145bd7efb91a9e751187dcd01da8cac72eb4beb7478a",
-				"dweb:/ipfs/QmcFTgeve49E4deCp5jxYHnjZLjttN1GoYt4gvU1L7Cu55"
+				"bzz-raw://9dddbaa42e8cfb326579c2ad38fcd61e68e8355a87beb40a3e6d4e336c2c3776",
+				"dweb:/ipfs/QmaPKd84MmH5PYk9rnoXQpX98HXgNPiT197iKZ8n1nGXsX"
 			]
 		},
 		"contracts/QuestionHelper.sol": {
-			"keccak256": "0xdd3f63cf097c76610f960d2317f60a67a5809bf4a72a102cd82f5a905ed96477",
+			"keccak256": "0x4f4972b14288b11b5c978d1c12d1e2bc13dda5cc6aaaa97428ac58b191b920a0",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://f11c655bea08f063b494b81081b8ff7c69b6b55657cabcf2a148d97efb9d4807",
-				"dweb:/ipfs/QmUk1S8o5btzc7tS4Tvk1bApJgGYdmfYCxNdCEZ7akXmkY"
+				"bzz-raw://267c4dec72687193cdd991ab5265233bfacd5d0d6212fcbcc1082eb18ae693cd",
+				"dweb:/ipfs/QmXVeoGJx2bogprkFn6BkXpLNMM9pJ2bfiMJTJZGpmNcmQ"
 			]
 		},
 		"hardhat/console.sol": {

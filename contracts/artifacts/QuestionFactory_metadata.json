@@ -174,17 +174,46 @@
 						"type": "address"
 					}
 				],
+				"name": "shareholderToQuestion",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "body",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "positiveVoteCount",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "negativeVoteCount",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
 				"name": "shareholders",
 				"outputs": [
 					{
 						"internalType": "uint32",
 						"name": "weight",
 						"type": "uint32"
-					},
-					{
-						"internalType": "bool",
-						"name": "voted",
-						"type": "bool"
 					},
 					{
 						"internalType": "uint32",
@@ -221,40 +250,6 @@
 				"name": "vote",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "voterToQuestion",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "body",
-						"type": "string"
-					},
-					{
-						"internalType": "uint32",
-						"name": "positiveVoteCount",
-						"type": "uint32"
-					},
-					{
-						"internalType": "uint32",
-						"name": "negativeVoteCount",
-						"type": "uint32"
-					},
-					{
-						"internalType": "bool",
-						"name": "active",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -299,19 +294,19 @@
 	},
 	"sources": {
 		"contracts/Director.sol": {
-			"keccak256": "0xac685985ecd028f9555af6e3ae3bdabbd114fe55aa11b82d77531edd868bb99c",
+			"keccak256": "0x494925d9b400ea71e10cf06b4a18948efb5718a8fd5956d81691869af8eceba4",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://5c0ebd66aa717b2b21c583fbf64b60e8f35c4f4acab762971f87c27c3d2ce190",
-				"dweb:/ipfs/Qmev8zpYQu2qby5U8aKzd9wTyADBRErefNED6X3hhyk4jX"
+				"bzz-raw://7773741b5b0d5dc5564d70b347216372a8eec36381d370cd0ecfe2ab08f0f800",
+				"dweb:/ipfs/QmRQa2xvNFxaVhoUfrP6kjwbXaq4BFpBc5DA55awvy2i2C"
 			]
 		},
 		"contracts/QuestionFactory.sol": {
-			"keccak256": "0x048879077b02f8893ff01180cb740742f358d9445369510256e8869be266f2c8",
+			"keccak256": "0xf28af7358736dd58a9fbc107d279a5f387c33e9806d495f80041919caadef6ab",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://4599aeab9d981cc4c278145bd7efb91a9e751187dcd01da8cac72eb4beb7478a",
-				"dweb:/ipfs/QmcFTgeve49E4deCp5jxYHnjZLjttN1GoYt4gvU1L7Cu55"
+				"bzz-raw://0f7ccd1ab96fa123098cdeba0e3ebcd2720b30b1fcea852d647baf8f5cdb495e",
+				"dweb:/ipfs/Qme8Jf9M4VruReWn5oQrAfcWCbZoYJ7b3XSpVHPLUuKhaN"
 			]
 		},
 		"hardhat/console.sol": {
