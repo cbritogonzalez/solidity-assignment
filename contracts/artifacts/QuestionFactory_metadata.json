@@ -148,14 +148,14 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "positiveVoteCount",
-						"type": "uint256"
+						"type": "uint32"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "negativeVoteCount",
-						"type": "uint256"
+						"type": "uint32"
 					},
 					{
 						"internalType": "bool",
@@ -177,9 +177,9 @@
 				"name": "shareholders",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "weight",
-						"type": "uint256"
+						"type": "uint32"
 					},
 					{
 						"internalType": "bool",
@@ -187,14 +187,14 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "vote",
-						"type": "uint256"
+						"type": "uint32"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "viewResults",
-						"type": "uint256"
+						"type": "uint32"
 					},
 					{
 						"internalType": "address",
@@ -239,14 +239,14 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "positiveVoteCount",
-						"type": "uint256"
+						"type": "uint32"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "uint32",
 						"name": "negativeVoteCount",
-						"type": "uint256"
+						"type": "uint32"
 					},
 					{
 						"internalType": "bool",
@@ -307,11 +307,11 @@
 			]
 		},
 		"contracts/QuestionFactory.sol": {
-			"keccak256": "0x17c8d06e7136029e4b98f76975f1129fa5f1a4578dd169920e287abc17a012af",
+			"keccak256": "0x048879077b02f8893ff01180cb740742f358d9445369510256e8869be266f2c8",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://685649fe3b1425b0729089fd1fe18522d67e78bf7274046c6290b6f902936836",
-				"dweb:/ipfs/QmPsZtCMwRxnAfD8orucghjP1wA77yv6DPe9gnLiCaAAuH"
+				"bzz-raw://4599aeab9d981cc4c278145bd7efb91a9e751187dcd01da8cac72eb4beb7478a",
+				"dweb:/ipfs/QmcFTgeve49E4deCp5jxYHnjZLjttN1GoYt4gvU1L7Cu55"
 			]
 		},
 		"hardhat/console.sol": {

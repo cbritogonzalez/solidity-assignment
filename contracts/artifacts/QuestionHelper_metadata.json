@@ -9,22 +9,29 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "questionId",
-						"type": "uint256"
+						"indexed": true,
+						"internalType": "address",
+						"name": "oldDirector",
+						"type": "address"
 					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newDirector",
+						"type": "address"
+					}
+				],
+				"name": "DirectorSet",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
 					{
 						"indexed": false,
 						"internalType": "string",
-						"name": "name",
+						"name": "body",
 						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "dna",
-						"type": "uint256"
 					}
 				],
 				"name": "NewQuestion",
@@ -34,53 +41,36 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "oldOwner",
-						"type": "address"
+						"indexed": false,
+						"internalType": "string",
+						"name": "body",
+						"type": "string"
 					},
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "positiveResults",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "negativeResults",
+						"type": "uint256"
 					}
 				],
-				"name": "OwnerSet",
+				"name": "QuestionResults",
 				"type": "event"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_questionId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_newDna",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "newDirector",
+						"type": "address"
 					}
 				],
-				"name": "changeDna",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_questionId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_newName",
-						"type": "string"
-					}
-				],
-				"name": "changeName",
+				"name": "changeDirector",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -89,11 +79,47 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "newOwner",
+						"name": "_voterId",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_rightValue",
+						"type": "uint256"
 					}
 				],
-				"name": "changeOwner",
+				"name": "changeRightToView",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_voterId",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_rightValue",
+						"type": "uint256"
+					}
+				],
+				"name": "changeRightToVote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_questionId",
+						"type": "uint256"
+					}
+				],
+				"name": "closeQuestionVoting",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -102,18 +128,31 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "_name",
+						"name": "_body",
 						"type": "string"
 					}
 				],
-				"name": "createRandomQuestion",
+				"name": "createQuestion",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "createShareholder",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "getOwner",
+				"name": "director",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -125,33 +164,8 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_owner",
-						"type": "address"
-					}
-				],
-				"name": "getQuestionsByOwner",
-				"outputs": [
-					{
-						"internalType": "uint256[]",
-						"name": "",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "questionToOwner",
+				"inputs": [],
+				"name": "getDirector",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -174,23 +188,133 @@
 				"outputs": [
 					{
 						"internalType": "string",
-						"name": "name",
+						"name": "body",
 						"type": "string"
 					},
 					{
+						"internalType": "uint32",
+						"name": "positiveVoteCount",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "negativeVoteCount",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "shareholders",
+				"outputs": [
+					{
+						"internalType": "uint32",
+						"name": "weight",
+						"type": "uint32"
+					},
+					{
+						"internalType": "bool",
+						"name": "voted",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint32",
+						"name": "vote",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "viewResults",
+						"type": "uint32"
+					},
+					{
+						"internalType": "address",
+						"name": "shareholderAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
-						"name": "dna",
+						"name": "_questionId",
+						"type": "uint256"
+					}
+				],
+				"name": "viewResults",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_questionId",
 						"type": "uint256"
 					},
 					{
+						"internalType": "uint256",
+						"name": "_vote",
+						"type": "uint256"
+					}
+				],
+				"name": "vote",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "voterToQuestion",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "body",
+						"type": "string"
+					},
+					{
 						"internalType": "uint32",
-						"name": "level",
+						"name": "positiveVoteCount",
 						"type": "uint32"
 					},
 					{
 						"internalType": "uint32",
-						"name": "readyTime",
+						"name": "negativeVoteCount",
 						"type": "uint32"
+					},
+					{
+						"internalType": "bool",
+						"name": "active",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -200,16 +324,16 @@
 		"devdoc": {
 			"kind": "dev",
 			"methods": {
-				"changeOwner(address)": {
-					"details": "Change owner",
+				"changeDirector(address)": {
+					"details": "Change director",
 					"params": {
-						"newOwner": "address of new owner"
+						"newDirector": "address of new director"
 					}
 				},
-				"getOwner()": {
-					"details": "Return owner address ",
+				"getDirector()": {
+					"details": "Return director address ",
 					"returns": {
-						"_0": "address of owner"
+						"_0": "address of director"
 					}
 				}
 			},
@@ -237,28 +361,28 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/2_Owner.sol": {
-			"keccak256": "0x78bbbec96c5bc30ed379cb4c7bc96af4af5c71a2ed6cbd7b202097223e055294",
+		"contracts/Director.sol": {
+			"keccak256": "0xac685985ecd028f9555af6e3ae3bdabbd114fe55aa11b82d77531edd868bb99c",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://4e78c8bdef7b614a92576df195209a00fcc09bbaa00ec98c0ea29cb2118da1c5",
-				"dweb:/ipfs/QmWrv2qJbxtDegicpu5rLGk4LgXvYvo1qXMW7qQpD6vGSX"
+				"bzz-raw://5c0ebd66aa717b2b21c583fbf64b60e8f35c4f4acab762971f87c27c3d2ce190",
+				"dweb:/ipfs/Qmev8zpYQu2qby5U8aKzd9wTyADBRErefNED6X3hhyk4jX"
 			]
 		},
 		"contracts/QuestionFactory.sol": {
-			"keccak256": "0xc8d8362392f22f9822a18f2847a813c69e9b9c5030dbf9a53798eff5de0b1be8",
+			"keccak256": "0x048879077b02f8893ff01180cb740742f358d9445369510256e8869be266f2c8",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://b3813764673a88374b558247ecbdee01e78672203c9e032e0ce7dfbbe88da835",
-				"dweb:/ipfs/QmZYoUjGMqkeCCy2WRiCGN8et6yLhHXZ4LUwKEq2iPgRM3"
+				"bzz-raw://4599aeab9d981cc4c278145bd7efb91a9e751187dcd01da8cac72eb4beb7478a",
+				"dweb:/ipfs/QmcFTgeve49E4deCp5jxYHnjZLjttN1GoYt4gvU1L7Cu55"
 			]
 		},
 		"contracts/QuestionHelper.sol": {
-			"keccak256": "0x6004b69d7db6f34d167787f1a70760d4b23d0318441db2b8ceb7fe1560c0da77",
+			"keccak256": "0xdd3f63cf097c76610f960d2317f60a67a5809bf4a72a102cd82f5a905ed96477",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://1371cb990528fd745c6dfab74167ecfb8bc476227d752a6a07087ef2d1bd3e10",
-				"dweb:/ipfs/Qmf3TwETTr13yvqUXFguSfkjjSrdv578jz9v7cinzuUei1"
+				"bzz-raw://f11c655bea08f063b494b81081b8ff7c69b6b55657cabcf2a148d97efb9d4807",
+				"dweb:/ipfs/QmUk1S8o5btzc7tS4Tvk1bApJgGYdmfYCxNdCEZ7akXmkY"
 			]
 		},
 		"hardhat/console.sol": {

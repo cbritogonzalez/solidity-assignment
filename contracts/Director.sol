@@ -27,7 +27,7 @@ contract Director {
     }
 
     /**
-     * @dev Set contract deployer as owner
+     * @dev Set contract deployer as director
      */
     constructor() {
         console.log("Director contract deployed by:", msg.sender);

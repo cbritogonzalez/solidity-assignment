@@ -67,7 +67,7 @@
 					}
 				},
 				"constructor": {
-					"details": "Set contract deployer as owner"
+					"details": "Set contract deployer as director"
 				},
 				"getDirector()": {
 					"details": "Return director address ",
@@ -87,7 +87,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/2_Owner.sol": "Director"
+			"contracts/Director.sol": "Director"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},
@@ -101,12 +101,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/2_Owner.sol": {
-			"keccak256": "0xac685985ecd028f9555af6e3ae3bdabbd114fe55aa11b82d77531edd868bb99c",
+		"contracts/Director.sol": {
+			"keccak256": "0x494925d9b400ea71e10cf06b4a18948efb5718a8fd5956d81691869af8eceba4",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://5c0ebd66aa717b2b21c583fbf64b60e8f35c4f4acab762971f87c27c3d2ce190",
-				"dweb:/ipfs/Qmev8zpYQu2qby5U8aKzd9wTyADBRErefNED6X3hhyk4jX"
+				"bzz-raw://7773741b5b0d5dc5564d70b347216372a8eec36381d370cd0ecfe2ab08f0f800",
+				"dweb:/ipfs/QmRQa2xvNFxaVhoUfrP6kjwbXaq4BFpBc5DA55awvy2i2C"
 			]
 		},
 		"hardhat/console.sol": {

@@ -10,19 +10,16 @@ contract QuestionFactory is Director {
 
 
     struct Shareholder {
-        uint weight; // weight is accumulated by delegation =0 cant vote, =1 can vote
-        bool voted;  // if true, that person already voted
-        uint vote;   // index of the voted proposal, 0=false,1=true
-        uint viewResults; // weight assigned to see if the Shareholder can see the results =0 cant, =1 can
+        uint32 weight; // weight is accumulated by delegation =0 cant vote, =1 can vote
+        uint32 vote;   // index of the voted proposal, 0=false,1=true
+        uint32 viewResults; // weight assigned to see if the Shareholder can see the results =0 cant, =1 can
         address shareholderAddress;
     }
 
     struct Question {
-        // If you can limit the length to a certain number of bytes, 
-        // always use one of bytes1 to bytes32 because they are much cheaper
         string body;   // short name (up to 32 bytes)
-        uint positiveVoteCount; // number of accumulated votes +
-        uint negativeVoteCount; // number of accumulated votes -
+        uint32 positiveVoteCount; // number of accumulated votes +
+        uint32 negativeVoteCount; // number of accumulated votes -
         bool active; // if the question is still active
     }
 
@@ -30,49 +27,52 @@ contract QuestionFactory is Director {
 
     address public director;
 
-    // mapping (uint => address) public questionToOwner; // not sure
-    // mapping (address => uint) ownerQuestionCount; // not sure
-
     mapping(address => Shareholder) public shareholders;
     mapping(address => Question) public voterToQuestion;
 
+    //Emoty Constructor where we set up the director and his properties. 
     constructor() {
         director = msg.sender;
         shareholders[director].weight = 1;
         shareholders[director].viewResults = 1;
     }
 
+    /*
+    param @_body the text body of the question
+    function to create a question 
+    */
     function createQuestion(string memory _body) public isDirector {
-        // require(msg.sender == director, "Only the director can create questions");
-        questions.push(Question(_body, 0, 0, true));
-        // uint id = questions.length - 1;
+        questions.push(Question(_body, 0, 0, true)); 
         emit NewQuestion(_body);
     }
 
+    /*
+    param @_address the address of the shareholder
+    function to create a shareholder
+    used for testing purposes
+    */
     function createShareholder(address _address) public isDirector {
-        // require(msg.sender == director, "Only the director can create questions");
         shareholders[_address].weight = 1;
         shareholders[_address].viewResults = 1;
         shareholders[_address].shareholderAddress = _address;
-        // uint id = questions.length - 1;
-        // emit NewQuestion(_body);
     }
 
+    /*
+    param @_questionId the id of the question that is being voted
+    param @_vote the vote of the shareholder (0 for falsem 1 for true)
+    */
     function vote(uint _questionId, uint _vote) public {
-       require(questions[_questionId].active == true); 
+       require(questions[_questionId].active == true);  //check if director did not close the voting process of the question
        require(shareholders[msg.sender].weight > 0); //check if shareholder can vote
-       Question storage questionVoted = voterToQuestion[msg.sender];
-       Question storage questionCurrentlyVoting = questions[_questionId];
-
+       Question storage questionVoted = voterToQuestion[msg.sender]; //question that is mapped to the voter
+       Question storage questionCurrentlyVoting = questions[_questionId]; //question that is currently being voted 
+       //compare the two questions (structs) to see if the shareholder voted this question
        require(keccak256(abi.encode(questionVoted)) != keccak256(abi.encode(questionCurrentlyVoting)));
-       shareholders[msg.sender].vote = _vote; //shareholder votes
-       shareholders[msg.sender].voted = true; //shareholder voted
        if (_vote > 0){ //add vote to VoteCount
         questions[_questionId].positiveVoteCount++;
        } else {
         questions[_questionId].negativeVoteCount++;
        }
-       //shareholders[msg.sender].weight = 0;
        voterToQuestion[msg.sender] = questions[_questionId]; //map shareholder to question
     }
 
